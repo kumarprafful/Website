@@ -1,0 +1,23 @@
+{% extends 'feed/base.html' %}
+{% block body %}
+		<div class="container">
+			<div class="row">
+		{% for story in all_stories reversed %}
+				<div class="col-md-4 col-sm-5 col-xs-10 content">
+					<div class="hovereffect">
+						<img class="img-responsive logo" src="{{ story.story_logo.url }}" alt="">
+						<div class="overlay">
+							<h2>{{ story.story_title }}</h2>
+							<h4>{{ story.genre }}</h4>
+							<a class="info" href="{% url 'feed:read' story.id %}">Read</a>
+
+						</div>
+				   <p>&nbsp;&nbsp;&nbsp;</p>
+				    </div>
+				</div>
+    	{% endfor %}
+			</div>
+		</div>
+
+
+{% endblock %}

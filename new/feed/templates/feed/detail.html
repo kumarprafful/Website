@@ -1,0 +1,94 @@
+{% extends 'feed/base.html' %}
+	
+		{% block body %}
+	<div class="container">
+	<section>
+	  <div class="col-lg-12">
+		<div class="main-container">
+			<div class="row">
+			    <div class="col-sm-3 img-section">
+                    <div class="center">
+                        <img class="story-pic" src="{{ story.story_logo.url }}" />
+                        <h5><br/> <b>{{ story.author }}</b> </h5>
+                        <h6>{{ story.date }}</h6>
+                    </div>
+                </div>
+				<div class="col-sm-9 writing-section">
+					<h2 class="story_title"><b>{{ story.story_title }}<br><br></b></h2>
+					<p class="story_content">{{ story.content|linebreaks }}</p>
+                <!--commenting-->
+                  
+                <!--till here-->
+                    <div class="stack">
+                      <button class="btn-danger btn btn-padding" data-toggle="modal" data-target="#confirm-delete">
+                        Delete
+                      </button>
+                      <form action="{% url 'feed:story-edit' story.id %}" method="get">
+                        {% csrf_token %}
+                    <button class="btn btn-primary btn-padding">Edit</button>
+                      </form>
+                      <form action="{% url 'feed:like' story.id %}" method="get">
+                      <button class="btn btn-block btn-primary"><i class="fa fa-thumbs-up"> Like ({{ story.likes }})</i> </button>
+                      </form>
+                    </div>
+
+                    <div class="modal fade" id="confirm-delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <h3>Are you sure?</h3>
+                                </div>
+                                <div class="modal-footer">
+                                     <form action="{% url 'feed:story-delete' story.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-danger">Delete</button>
+                                        <button class="btn-primary btn" data-dismiss="modal">No</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+ {% with comments.count as total_comments %}
+<h2>{{ total_comments }} comment{{total_comments|pluralize }}</h2>
+{% endwith %}
+
+{% for comment in comments %}
+    <div class="comment">
+        <p class="info">
+            Comment {{ forloop.counter }} : {{comment.name }} |
+            {{ comment.created }}
+        </p>
+        {{ comment.body|linebreaks }}
+    </div>
+    {% empty %} 
+    <p>There are no comments yet.</p>
+    
+    {% endfor %}
+    {% if new_comment %}
+        <h2>Your comment has been added.</h2>
+    {% else %}
+        <h2>Add a new comment</h2>
+        <form action="." method="post">
+            {{ comment_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Add comment"></p>
+        </form>
+
+
+    {% endif %} 
+
+                     
+                </div>
+
+
+			</div>
+		</div>
+	</section>
+	</div>		
+				
+		{% endblock %}
+

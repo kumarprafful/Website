@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Title</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		{% load staticfiles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'feed/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'feed/css/bootstrap-theme.min.css' %}">
+		<script src="https://use.fontawesome.com/baa68ae363.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+		<script src="{% static 'feed/js/jquery-3.1.1.slim.js' %}"></script>
+		<script src="{% static 'feed/js/bootstrap.js' %}"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'feed/css/style.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'feed/css/form.css' %}">
+
+	</head>
+	<body class="background" background="{% static 'feed/images/new.jpg' %}">
+		<nav class="navbar fixed-nav-bar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!--logo-->
+					<a href="{% url 'feed:index' %}" class="navbar-brand">Title</a>
+				</div>
+				<div class="collapse navbar-collapse" id="mainNavBar">
+					<ul class="nav navbar-nav">
+						<form class="navbar-form navbar-left">
+							<input class="form-control form-search" role="search" autocomplete="off" name="q" action="#" placeholder="What would you like to read..." />
+							<button class="btn search" type="search">Search</button>
+						</form>
+
+
+						
+						<li class="nav-contents"><a href="{% url 'feed:story-publish' %}">Publish</a></li>
+
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<div class="nav pull-right">
+								<button type="button" class="login" data-toggle="modal" data-target="#popUp">Log In</button>
+								<div class="modal fade" id="popUp">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h3 class="modal-title center">Log In</h3>
+										<div class="modal-body">
+													<form role="form">
+														<div class="input-group">
+														   <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+															<input type="email" class="form-control" placeholder="E-mail">
+														</div>
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+															<input type="password" class="form-control" placeholder="Password">
+														</div>
+														<div class="modal-footer">
+															<button class="btn btn-primary btn-block">Log In</button>
+															<a href="forgot-password" class="center">Forgot Password</a>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+		</nav>
+	
+	{% block body %}
+	{% endblock %}
+
+	
+	
+	</body>
+	<footer class="footer"> 
+			<div class="footer-container">
+				<p>Made with <i class="fa fa-heart-o" aria-hidden="true"></i> in India</p>
+
+				
+			</div>
+	</footer>
+</html>
